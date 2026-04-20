@@ -1,11 +1,12 @@
 package com.lta.backend.config;
 
-import lombok.extern.log4j.Log4j2;
 import org.apache.kafka.clients.admin.AdminClientConfig;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.apache.kafka.common.serialization.StringSerializer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
 import org.springframework.context.annotation.Bean;
@@ -16,9 +17,10 @@ import org.springframework.kafka.listener.RecordInterceptor;
 
 import java.util.HashMap;
 
-@Log4j2
 @Configuration
 public class StringConsumerConfig {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(StringConsumerConfig.class);
 
     @Autowired
     private KafkaProperties kafkaProperties;
@@ -47,9 +49,9 @@ public class StringConsumerConfig {
         String value = record.value();
 
         if(value.contains("Pan")){
-            log.warn("🔥 [FILTRO ACTIVADO] Mensaje relevante detectado: {}", value);
+            LOGGER.warn("🔥 [FILTRO ACTIVADO] Mensaje relevante detectado: {}", value);
         } else {
-            log.info("❌ Mensaje ignorado por filtro: {}", value);
+            LOGGER.info("❌ Mensaje ignorado por filtro: {}", value);
         }
 
         return record;
