@@ -47,9 +47,9 @@ public class StringConsumerConfig {
         String value = record.value();
 
         if(value.contains("Pan")){
-            log.warn("🔥 [FILTRO ACTIVADO] Mensaje relevante detectado: {}", value);
+            log.warn("[FILTRO ACTIVADO] Mensaje relevante detectado: {}", value);
         } else {
-            log.info("❌ Mensaje ignorado por filtro: {}", value);
+            log.info("Mensaje ignorado por filtro: {}", value);
         }
 
         return record;

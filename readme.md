@@ -92,22 +92,11 @@ docker-compose down -v
 docker system prune -f
 
 
-----------------------Probar producer-----------------
+__consumer_offsets
 
-docker exec -it kafka bash
-
-kafka-console-producer \
-  --broker-list kafka:29092 \
-  --topic test-topic
-
-  Hola Kafka 😎
-
-
-----------------------Probar producer-----------------
-
-docker exec -it kafka bash
-
-kafka-console-consumer \
-  --bootstrap-server kafka:29092 \
-  --topic test-topic \
-  --from-beginning
+| Tipo            | Qué significa              |
+| --------------- | -------------------------- |
+| join group      | se conectó un consumer     |
+| assignment      | Kafka repartió particiones |
+| commit          | guardó progreso            |
+| commit otra vez | volvió a guardar progreso  |

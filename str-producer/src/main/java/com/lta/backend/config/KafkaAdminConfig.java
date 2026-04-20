@@ -15,6 +15,7 @@ public class KafkaAdminConfig {
     @Autowired
     private KafkaProperties kafkaProperties;
 
+    // Configura la conexión administrativa con Kafka
     @Bean
     public KafkaAdmin kafkaAdmin(){
         var configs = new HashMap<String,Object>();
@@ -22,10 +23,12 @@ public class KafkaAdminConfig {
         return new KafkaAdmin(configs);
     }
 
+    // Crea automáticamente el tópico "str-topic" al iniciar la aplicación
     @Bean
     public KafkaAdmin.NewTopics topics(){
         return new KafkaAdmin.NewTopics(
-                TopicBuilder.name("str-topic").partitions(2).replicas(1).build()
+            TopicBuilder.name("str-topic").partitions(2).replicas(1).build(),
+            TopicBuilder.name("str-topic-response").partitions(2).replicas(1).build()
         );
     }
 }
