@@ -30,6 +30,24 @@ services:
 
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
 
+  kafka-init:
+    image: confluentinc/cp-kafka:7.4.0
+    container_name: kafka-init
+    depends_on:
+      - kafka
+    networks:
+      - broker-kafka
+    entrypoint: ["/bin/sh", "-c"]
+    command: >
+      "
+      echo 'Waiting for Kafka...';
+      cub kafka-ready -b kafka:29092 1 30;
+      kafka-topics --create --if-not-exists --topic patients-management-topic --bootstrap-server kafka:29092 --partitions 3 --replication-factor 1;
+      kafka-topics --create --if-not-exists --topic appointments-management-topic --bootstrap-server kafka:29092 --partitions 3 --replication-factor 1;
+      kafka-topics --create --if-not-exists --topic patient-view-topic --bootstrap-server kafka:29092 --partitions 2 --replication-factor 1;
+      kafka-topics --list --bootstrap-server kafka:29092;
+      "
+
   kafdrop:
     image: obsidiandynamics/kafdrop:latest
     container_name: kafdrop

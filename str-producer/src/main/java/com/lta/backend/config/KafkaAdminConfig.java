@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.config.TopicBuilder;
 import org.springframework.kafka.core.KafkaAdmin;
+import com.lta.backend.kafka.KafkaTopics;
 
 import java.util.HashMap;
 
@@ -25,7 +26,9 @@ public class KafkaAdminConfig {
     @Bean
     public KafkaAdmin.NewTopics topics(){
         return new KafkaAdmin.NewTopics(
-                TopicBuilder.name("str-topic").partitions(2).replicas(1).build()
+                TopicBuilder.name(KafkaTopics.PATIENTS_TOPIC).partitions(3).replicas(1).build(),
+                TopicBuilder.name(KafkaTopics.APPOINTMENTS_TOPIC).partitions(3).replicas(1).build(),
+                TopicBuilder.name(KafkaTopics.PATIENT_VIEW_TOPIC).partitions(2).replicas(1).build()
         );
     }
 }
