@@ -161,7 +161,7 @@ Este consumer escucha los 3 topicos y muestra eventos recibidos.
 
 El diagrama esta en:
 
-- docs/infraestructura.md
+- docs/infraestructura.png
 
 Incluye:
 
