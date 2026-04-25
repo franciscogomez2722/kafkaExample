@@ -1,3 +1,4 @@
+Nota este readme fue redactado con ayuda de IA
 # Sistema de microservicios con Kafka
 
 Este proyecto implementa una arquitectura distribuida con mensajeria desacoplada usando Apache Kafka, cumpliendo con:
